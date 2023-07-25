@@ -1,0 +1,41 @@
+{%extends 'shop/layouts/main.html' %}
+{%block title %}
+    Home | Book Store
+{%endblock title %}
+{%block content %}
+<section class="bg-light py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">{{product}} Details</h4>    
+                <hr style="border-color:#b8bfc2;">
+            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'ShopHome' %}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'categories' product.category.bname %}">Collection</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{product}}</li>
+                </ol>
+            </nav>
+            <div class="col-4 my-3">
+                <img src="{{product.product_image.url}}" class="card-img-top" alt="Categories">
+            </div>
+            <div class="col-8 my-3">
+                <h5 class="text-success">{{product | upper}}</h5>
+                <p>{{product.description}}</p>
+                <h6 class="my-2 text-danger">Current Price: Rs.{{product.sel_price}}</h6>
+                <h5 class="my-2 text-primary">Offer Price: Rs.{{product.org_price}}</h5>
+                <div class="my-3">
+                    {% if product.quantity > 0 %}
+                        <span class="text-success">In Stock</span>
+                    {% else %}
+                        <span class="text-danger">Out of Stock</span>
+                    {% endif %}
+                    <button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                    <button class="btn btn-danger"><i class="fa fa-heart"></i> Wishlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock content %}
